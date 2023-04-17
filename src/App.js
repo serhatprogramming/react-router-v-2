@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   Routes,
   Route,
   Link,
   Navigate,
-  useParams,
-  useNavigate,
   useMatch,
+  useNavigate,
 } from "react-router-dom";
 
 const Home = () => (
@@ -89,7 +88,7 @@ const Login = (props) => {
 };
 
 const App = () => {
-  const [notes, setNotes] = useState([
+  const initialNotes = [
     {
       id: 1,
       content: "HTML is easy",
@@ -108,7 +107,14 @@ const App = () => {
       important: true,
       user: "Arto Hellas",
     },
-  ]);
+  ];
+
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    setNotes(initialNotes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [user, setUser] = useState(null);
 
